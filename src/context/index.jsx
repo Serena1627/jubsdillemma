@@ -8,7 +8,9 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [recipeList, setRecipeList] = useState([]);
   const [recipeDetailsData, setRecipeDetailsData] = useState(null);
-  const [favoritesList, setFavoritesList] = useState([])
+  const [favoritesList, setFavoritesList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [itemsPerPage] = useState(6); 
 
   const navigate = useNavigate()
 
@@ -23,6 +25,7 @@ export default function GlobalState({ children }) {
       if (data?.data?.recipes) {
         setRecipeList(data?.data?.recipes);
         setLoading(false);
+        setCurrentPage(1);
         setSearchParam("");
         navigate('/')
       }
@@ -60,7 +63,10 @@ export default function GlobalState({ children }) {
         recipeDetailsData,
         setRecipeDetailsData,
         handleAddToFavorite,
-        favoritesList
+        favoritesList,
+        currentPage,
+        setCurrentPage,
+        itemsPerPage
       }}
     >
       {children}
